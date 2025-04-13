@@ -2,9 +2,9 @@ package com.nhom24.doanptuddd.model;
 
 public class Book {
     private String title;
-    private String imageResId;
+    private int imageResId;
 
-    public Book(String title, String imageResId) {
+    public Book(String title, int imageResId) {
         this.title = title;
         this.imageResId = imageResId;
     }
@@ -17,11 +17,11 @@ public class Book {
         this.title = title;
     }
 
-    public String getImageResId() {
+    public int getImageResId() {
         return imageResId;
     }
 
-    public void setImageResId(String imageResId) {
+    public void setImageResId(int imageResId) {
         this.imageResId = imageResId;
     }
 }

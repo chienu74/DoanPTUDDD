@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
+<LinearLayout android:layout_width="160dp"
     android:layout_height="220dp"
-    app:cardCornerRadius="8dp"
-    android:layout_margin="8dp">
-
-    <RelativeLayout
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imgComic"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/logo"/>
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/tvComicTitle"
+            android:textSize="30sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/black"
-            android:padding="4dp"
-            android:text="Tên truyện"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"/>
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            android:text="@string/ten_truyen" />
+    </LinearLayout>
+</LinearLayout>
