@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/backgroudlogin"
+
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="390dp"
+        android:background="@drawable/rounded_layout"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chào mừng bạn đến với"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:textFontWeight="700"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comic Plunder 👋"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="#4796FB"
+            android:textFontWeight="700" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Ứng dụng số một về Truyện tranh và ứng dụng đọc trên toàn thế giới"
+            android:textColor="#212121"
+            android:textFontWeight="400"
+            android:textSize="16sp" />
+
+
+        <Button
+            android:id="@+id/btn_google"
+            style="@style/btn_google"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="60dp"
+            android:text="Đăng nhập bằng Google"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/btn_start"
+            style="@style/btn_start"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:text="Bắt đầu"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/txt_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="Đã có tài khoản?"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@android:color/black"
+            android:textFontWeight="400"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+</LinearLayout>
