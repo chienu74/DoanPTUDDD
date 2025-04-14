@@ -16,22 +16,22 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookAdapter bookAdapter;
     private List<Book> books;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
+
         recyclerView = findViewById(R.id.recyclerTopComics);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         books = new ArrayList<>();
-        books.add(new Book("One Piece", "https://example.com/onepiece.jpg"));
-        books.add(new Book("Naruto", "https://example.com/naruto.jpg"));
-        books.add(new Book("Dragon Ball", "https://example.com/dragonball.jpg"));
+        books.add(new Book("One Piece", R.drawable.logo));
+        books.add(new Book("Naruto", R.drawable.logo));
+        books.add(new Book("Dragon Ball", R.drawable.logo));
 
-        bookAdapter = new BookAdapter(books);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.setAdapter(bookAdapter);
+        BookAdapter adapter = new BookAdapter(books);
+        recyclerView.setAdapter(adapter);
 
     }
 }

@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="ten_truyen">Tên truyện</string>
+    <string name="c_v_n_b_n">Đọc văn bản</string>
+    <string name="d_ng">Dừng</string>
 </resources>
