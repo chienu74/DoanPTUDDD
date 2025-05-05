@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Mắt -->
+    <path
+        android:fillColor="#888888"
+        android:pathData="M1,12c2.5,-5 7.5,-9 11,-9s8.5,4 11,9c-2.5,5 -7.5,9 -11,9s-8.5,-4 -11,-9zM12,16c2.2,0 4,-1.8 4,-4s-1.8,-4 -4,-4 -4,1.8 -4,4 1.8,4 4,4z"/>
+
+    <!-- Đường gạch chéo -->
+    <path
+        android:strokeColor="#888888"
+        android:strokeWidth="2"
+        android:fillColor="@android:color/transparent"
+        android:pathData="M3,3 L21,21" />
+</vector>
