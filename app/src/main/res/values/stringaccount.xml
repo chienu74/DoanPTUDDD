@@ -1,0 +1,10 @@
+<resources>
+    <string-array name="area_list">
+        <item>Nghệ An</item>
+        <item>Hà Nội</item>
+        <item>Đà Nẵng</item>
+        <item>Hải Phòng</item>
+        <item>Cần Thơ</item>
+        <item>Hồ Chí Minh</item>
+    </string-array>
+</resources>
