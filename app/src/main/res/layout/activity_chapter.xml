@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChapterActivity">
+    tools:context=".activity.ChapterActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -20,7 +20,6 @@
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:text="@string/app_name"
-            android:textColor="@color/black"
             android:textSize="16sp" />
 
     </ScrollView>

@@ -1,5 +1,7 @@
 package com.nhom24.doanptuddd.model;
+
 import com.google.gson.annotations.SerializedName;
+
 public class User {
     @SerializedName("accountName") // Tên field đúng với backend
     private String accountName;

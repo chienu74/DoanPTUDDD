@@ -1,6 +1,5 @@
-package com.nhom24.doanptuddd;
+package com.nhom24.doanptuddd.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +8,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nhom24.doanptuddd.Service.ApiService;
+import com.nhom24.doanptuddd.R;
+import com.nhom24.doanptuddd.service.ApiService;
 import com.nhom24.doanptuddd.model.ApiResponse;
 import com.nhom24.doanptuddd.model.User;
 
