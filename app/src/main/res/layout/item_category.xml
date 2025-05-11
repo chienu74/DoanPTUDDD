@@ -11,14 +11,14 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imgCategory"
+            android:id="@+id/img_book_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/logo"/>
 
         <TextView
-            android:id="@+id/tvCategoryName"
+            android:id="@+id/txt_book_category_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

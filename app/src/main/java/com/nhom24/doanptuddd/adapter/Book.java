@@ -1,4 +1,4 @@
-package com.nhom24.doanptuddd.model;
+package com.nhom24.doanptuddd.adapter;
 
 public class Book {
     private String title;

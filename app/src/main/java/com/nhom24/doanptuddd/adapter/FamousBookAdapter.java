@@ -11,14 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nhom24.doanptuddd.R;
-import com.nhom24.doanptuddd.model.Book;
 
 import java.util.List;
 
-public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
+public class FamousBookAdapter extends RecyclerView.Adapter<FamousBookAdapter.BookViewHolder> {
     private List<Book> books;
 
-    public BookAdapter(List<Book> books) {
+    public FamousBookAdapter(List<Book> books) {
         this.books = books;
     }
 
@@ -32,8 +31,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = books.get(position);
-        holder.textView.setText(book.getTitle());
-        holder.imageView.setImageResource(book.getImageResId());
+        holder.txt_book_name.setText(book.getTitle());
+        holder.img_book.setImageResource(book.getImageResId());
     }
 
     @Override
@@ -43,13 +42,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
 
     public class BookViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
-        private ImageView imageView;
+        private TextView txt_book_name;
+        private ImageView img_book;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.txt_book_name);
-            imageView = itemView.findViewById(R.id.img_book);
+            txt_book_name = itemView.findViewById(R.id.txt_book_name);
+            img_book = itemView.findViewById(R.id.img_book);
         }
     }
 }

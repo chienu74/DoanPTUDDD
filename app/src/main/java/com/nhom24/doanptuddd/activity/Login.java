@@ -1,6 +1,5 @@
-package com.nhom24.doanptuddd;
+package com.nhom24.doanptuddd.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,7 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.nhom24.doanptuddd.Service.ApiService;
+import com.nhom24.doanptuddd.R;
+import com.nhom24.doanptuddd.service.ApiService;
 import com.nhom24.doanptuddd.model.ApiResponse;
 import com.nhom24.doanptuddd.model.User;
 
@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 // Chuyển sang màn hình chính
-                                startActivity(new Intent(Login.this, HomeActivity.class));
+//                                startActivity(new Intent(Login.this, HomeActivity.class));
                                 finish();
                             } else {
                                 // Thất bại
