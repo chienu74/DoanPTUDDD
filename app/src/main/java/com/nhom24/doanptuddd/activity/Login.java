@@ -8,11 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nhom24.doanptuddd.Service.ApiService;
 import com.nhom24.doanptuddd.model.ApiResponse;
 import com.nhom24.doanptuddd.model.User;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +26,7 @@ public class Login extends AppCompatActivity {
     private EditText emailInput, passwordInput;
     private Button loginButton;
     private ProgressBar loginProgressBar;
-    private static final String BASE_URL = "https://comic.minhquancao0.workers.dev/api/"; // Thay URL đúng của API
+    private static final String BASE_URL = "https://comic.minhquancao0.workers.dev/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class Login extends AppCompatActivity {
         emailInput = findViewById(R.id.email_input);
         passwordInput = findViewById(R.id.password_input);
         loginButton = findViewById(R.id.login_button);
-        loginProgressBar= findViewById(R.id.loginProgressBar);
+        loginProgressBar = findViewById(R.id.loginProgressBar);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +82,7 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 // Chuyển sang màn hình chính
-//                                startActivity(new Intent(Login.this, HomeActivity.class));
+                                startActivity(new Intent(Login.this, HomeActivity.class));
                                 finish();
                             } else {
                                 // Thất bại
