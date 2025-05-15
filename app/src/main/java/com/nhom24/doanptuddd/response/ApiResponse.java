@@ -1,4 +1,4 @@
-package com.nhom24.doanptuddd.model;
+package com.nhom24.doanptuddd.response;
 
 import com.google.gson.annotations.SerializedName;
 

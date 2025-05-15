@@ -1,5 +1,6 @@
 package com.nhom24.doanptuddd.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.service.ApiService;
-import com.nhom24.doanptuddd.model.ApiResponse;
+import com.nhom24.doanptuddd.response.ApiResponse;
 import com.nhom24.doanptuddd.model.User;
 
 import retrofit2.Call;
@@ -88,7 +89,7 @@ public class Register extends AppCompatActivity {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(Register.this, HomeActivity.class));
+                    startActivity(new Intent(Register.this, Login.class));
                     finish();
                 } else {
                     registerButton.setEnabled(true);
