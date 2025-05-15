@@ -9,4 +9,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tl">Thể loại</string>
+    <string name="author">author</string>
+    <string name="c_m_i_nh_t">Đọc mới nhất</string>
+    <string name="ch_ng_m_i_nh_t">Chương mới nhất</string>
+    <string name="b_nh_lu_n">Bình luận</string>
+    <string name="c_t_u">Đọc từ đầu</string>
+    <string name="_07_23_15_05_2025">07:23 15/05/2025</string>
+    <string name="_123345">123345</string>
+    <string name="name_book">Name book</string>
 </resources>

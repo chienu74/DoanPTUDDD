@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.service.ApiService;
-import com.nhom24.doanptuddd.model.ApiResponse;
+import com.nhom24.doanptuddd.response.ApiResponse;
 import com.nhom24.doanptuddd.model.User;
 
 import retrofit2.Call;
