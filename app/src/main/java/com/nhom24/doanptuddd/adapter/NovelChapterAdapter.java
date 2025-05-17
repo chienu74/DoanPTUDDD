@@ -1,6 +1,7 @@
 package com.nhom24.doanptuddd.adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -13,15 +14,16 @@ import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.activity.ChapterActivity;
 import com.nhom24.doanptuddd.model.NovelChapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NovelChapterAdapter extends RecyclerView.Adapter<NovelChapterAdapter.ChapterViewHolder> {
     private List<NovelChapter> chapters;
-    private int chapterId;
+    private int novelId;
 
     public NovelChapterAdapter(List<NovelChapter> chapters, int chapterId) {
         this.chapters = chapters;
-        this.chapterId = chapterId;
+        this.novelId = chapterId;
     }
 
     @NonNull
@@ -34,14 +36,16 @@ public class NovelChapterAdapter extends RecyclerView.Adapter<NovelChapterAdapte
     @Override
     public void onBindViewHolder(@NonNull ChapterViewHolder holder, int position) {
         NovelChapter chapter = chapters.get(position);
-//        holder.textView.setText(chapter.getTitle());
+        holder.textView.setText(chapter.getTitle());
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("NovelChapterAdapter", "chapterId: "+ chapter.getId());
+                Log.e("NovelChapterAdapter", "novelId: "+ novelId);
                 Intent intent = new Intent(v.getContext(), ChapterActivity.class);
-//                intent.putExtra("chapter_id", chapter.getId());
-                intent.putExtra("chapter_id", 1);
-                intent.putExtra("book_id", chapterId);
+                intent.putExtra("chapter_id", chapter.getId());
+                intent.putExtra("book_id", novelId);
+                intent.putParcelableArrayListExtra("chapters", (ArrayList<NovelChapter>) chapters);
                 v.getContext().startActivity(intent);
             }
         });

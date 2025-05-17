@@ -12,14 +12,19 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_novel"
         android:name="com.nhom24.doanptuddd.fragment.BlankFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_novel"
+        tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/navigation_comic"
+        android:name="com.nhom24.doanptuddd.fragment.BlankFragment"
+        android:label="@string/title_comic"
+        tools:layout="@layout/fragment_blank" />
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.nhom24.doanptuddd.fragment.BlankFragment"
+        android:label="@string/title_account"
         tools:layout="@layout/fragment_blank" />
 
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_notifications"-->
-<!--        android:name="com.nhom24.doanptuddd.ui.notifications.NotificationsFragment"-->
-<!--        android:label="@string/title_notifications"-->
-<!--        tools:layout="@layout/fragment_notifications" />-->
 </navigation>

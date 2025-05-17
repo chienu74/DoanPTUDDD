@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/avatar"
+            android:src="@drawable/img_avatar"
             android:scaleType="centerCrop"
             android:background="@drawable/avatar_border"
             android:contentDescription="Avatar"
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
-                android:drawableStart="@drawable/icon_user"
+                android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="12dp"
                 android:padding="16dp"
                 android:text="Thông tin"

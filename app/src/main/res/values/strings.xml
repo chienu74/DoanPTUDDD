@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">DoanPTUDDD</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Trang chủ</string>
     <string name="ten_truyen">Tên truyện</string>
     <string name="c_v_n_b_n">Đọc văn bản</string>
     <string name="d_ng">Dừng</string>
@@ -17,4 +15,7 @@
     <string name="_07_23_15_05_2025">07:23 15/05/2025</string>
     <string name="_123345">123345</string>
     <string name="name_book">Name book</string>
+    <string name="title_account">Tài khoản</string>
+    <string name="title_novel">Tiểu thuyết</string>
+    <string name="title_comic">Truyện tranh</string>
 </resources>
