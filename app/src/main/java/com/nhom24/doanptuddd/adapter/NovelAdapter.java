@@ -37,8 +37,8 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.BookViewHold
 
         Glide.with(holder.imageViewBook.getContext())
                 .load(book.getCover_image())
-                .placeholder(R.drawable.logo)
-                .error(R.drawable.logo)
+                .placeholder(R.drawable.img_logo)
+                .error(R.drawable.img_logo)
                 .into(holder.imageViewBook);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
