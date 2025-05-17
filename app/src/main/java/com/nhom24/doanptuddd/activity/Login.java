@@ -92,7 +92,10 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(Login.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                            loginButton.setEnabled(true);
+                            loginButton.setText("Đăng nhập"); // Ẩn text trên nút
+                            loginProgressBar.setVisibility(View.VISIBLE);
                         }
                     }
 
