@@ -3,14 +3,14 @@ package com.nhom24.doanptuddd.model;
 public class CategoryBook {
     private int categoryBookId;
     private String categoryBookName;
-    private String categoryBookDescription;
-    private String categoryBookImage;
+    private String description;
+    private String bookCategoryImage;
 
     public CategoryBook(int categoryBookId, String categoryBookName, String categoryBookDescription, String categoryBookImage) {
         this.categoryBookId = categoryBookId;
         this.categoryBookName = categoryBookName;
-        this.categoryBookDescription = categoryBookDescription;
-        this.categoryBookImage = categoryBookImage;
+        this.description = categoryBookDescription;
+        this.bookCategoryImage = categoryBookImage;
     }
 
     public int getCategoryBookId() {
@@ -29,19 +29,19 @@ public class CategoryBook {
         this.categoryBookName = categoryBookName;
     }
 
-    public String getCategoryBookDescription() {
-        return categoryBookDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategoryBookDescription(String categoryBookDescription) {
-        this.categoryBookDescription = categoryBookDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getCategoryBookImage() {
-        return categoryBookImage;
+    public String getBookCategoryImage() {
+        return bookCategoryImage;
     }
 
-    public void setCategoryBookImage(String categoryBookImage) {
-        this.categoryBookImage = categoryBookImage;
+    public void setBookCategoryImage(String bookCategoryImage) {
+        this.bookCategoryImage = bookCategoryImage;
     }
 }

@@ -5,28 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.nhom24.doanptuddd.R;
-import com.nhom24.doanptuddd.model.Book;
-import com.nhom24.doanptuddd.service.ApiService;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BlankFragment extends Fragment {
     private TextView textViewResult;
@@ -36,32 +18,43 @@ public class BlankFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_blank, container, false);
 
         textViewResult = view.findViewById(R.id.textViewResult);
-        initDAta();
+//        initDAta();
         return view;
     }
 
-    private void initDAta() {
-        ApiService.apiService.getBooks().enqueue(new Callback<List<Book>>() {
-            @Override
-            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
-                List<Book> bookss = response.body();
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Book> books = response.body();
-                    if (books != null && !books.isEmpty()) {
-                        Book book = books.get(0); // Lấy book đầu tiên
-                        textViewResult.setText(book.getBookName()); // Hiển thị tên book
-                    } else {
-                        Toast.makeText(getContext(), "Không có sách nào", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(getContext(), "Lỗi response: " + response.message(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Book>> call, Throwable t) {
-                Toast.makeText(getContext(), "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+//    private void initDAta() {
+//        Retrofit retrofit = RetrofitClient.getRetrofitInstance();
+//        ApiService apiService = retrofit.create(ApiService.class);
+//
+//        Call<Book> call = apiService.getBookById(2);
+//        call.enqueue(new Callback<Book>() {
+//            @Override
+//            public void onResponse(Call<Book> call, Response<Book> response) {
+//
+//                if (response.isSuccessful()) {
+//                    Book book = response.body();
+//                }else {
+//                    String errorMessage = "Error: HTTP " + response.code();
+//                    if (response.errorBody() != null) {
+//                        try {
+//                            errorMessage += "\n" + response.errorBody().string();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                    textViewResult.setText(errorMessage);
+//                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+//                    Log.e("API_ERROR", errorMessage);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Book> call, Throwable t) {
+//                String errorMessage = "API call failed: " + t.getMessage();
+//                Log.e("API_FAILURE", errorMessage, t);
+//                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_LONG).show();
+//                textViewResult.setText(errorMessage);
+//            }
+//        });
+//    }
 }
