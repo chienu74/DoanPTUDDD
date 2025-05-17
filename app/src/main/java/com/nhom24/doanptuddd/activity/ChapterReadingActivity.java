@@ -87,7 +87,7 @@ public class ChapterReadingActivity extends AppCompatActivity {
 
     // Hàm để tải ảnh của chapter
     private void fetchChapterImages(String comicId, String chapterId) {
-        Call<ChapterImageResponse> call = ApiService.comicAPIServer.getChapterImages(comicId, chapterId);
+        Call<ChapterImageResponse> call = ApiService.apiService.getChapterImages(comicId, chapterId);
 
         call.enqueue(new Callback<ChapterImageResponse>() {
             @Override
