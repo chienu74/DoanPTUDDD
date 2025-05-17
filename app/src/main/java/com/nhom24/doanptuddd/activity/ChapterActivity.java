@@ -1,6 +1,7 @@
 package com.nhom24.doanptuddd.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -8,10 +9,9 @@ import android.speech.tts.UtteranceProgressListener;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -23,47 +23,64 @@ import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.model.NovelChapter;
 import com.nhom24.doanptuddd.repository.NovelChapterRepository;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class ChapterActivity extends AppCompatActivity {
     private TextView textView;
     private ScrollView scrollView;
-    private Button speakButton, stopButton;
+    private Button speakButton, nextButton, previousButton;
     private SeekBar seekBar;
     private TextToSpeech textToSpeech;
 
-    private String[] paragraphs = new String[0]; // Khởi tạo mặc định
+    private String fullText = "";
+    private String[] paragraphs = new String[0];
     private SpannableString spannableText;
-    private int currentParagraphIndex = 0;
     private boolean isSpeaking = false;
+    private int nextChapterId, previousChapterId;
+    private int currentParagraphIndex = 0;
     private int start = 0;
     private int end = 0;
     private int chapterId, bookId;
-    private String fullText = ""; // Khởi tạo chuỗi rỗng
+    private int textColor2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapter);
 
-        // Khởi tạo views
         textView = findViewById(R.id.tv_description);
         scrollView = findViewById(R.id.scrollView);
         speakButton = findViewById(R.id.btn_play);
-        stopButton = findViewById(R.id.btn_stop);
         seekBar = findViewById(R.id.sb_chapter);
+        nextButton = findViewById(R.id.btn_next);
+        previousButton = findViewById(R.id.btn_previous);
 
-        // Lấy bookId và chapterId từ Intent
         Intent intent = getIntent();
-        bookId = intent.getIntExtra("book_id", -1);
-        chapterId = intent.getIntExtra("chapter_id", 1);
-        if (bookId == -1) {
-            Toast.makeText(this, "Lỗi: Không tìm thấy ID tiểu thuyết", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
+        bookId = intent.getIntExtra("book_id",-1);
+        chapterId = intent.getIntExtra("chapter_id", -1);
+
+        ArrayList<NovelChapter> chapters = intent.getParcelableArrayListExtra("chapters");
+        if (chapters != null) {
+            for (int i = 0; i < chapters.size(); i++) {
+                if (chapters.get(i).getId() == chapterId) {
+                    if (i == 0) {
+                        previousButton.setEnabled(false);
+                    }
+                    if (i > 0) {
+                        previousChapterId = chapters.get(i - 1).getId();
+                    }
+                    if (i < chapters.size() - 1) { // Chỉ truy cập next nếu không phải chapter cuối
+                        nextChapterId = chapters.get(i + 1).getId();
+                    } else {
+                        nextButton.setEnabled(false);
+                    }
+                    fullText += chapters.get(i).getTitle() + ". ";
+                    break;
+                }
+            }
         }
 
-        // Khởi tạo TextToSpeech
         textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
             if (status != TextToSpeech.ERROR) {
                 textToSpeech.setLanguage(new Locale("vi", "VN"));
@@ -74,7 +91,6 @@ public class ChapterActivity extends AppCompatActivity {
         textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
-                // Không cần xử lý
             }
 
             @Override
@@ -84,15 +100,14 @@ public class ChapterActivity extends AppCompatActivity {
 
                 if (currentParagraphIndex < paragraphs.length) {
                     seekBar.setProgress(currentParagraphIndex);
-                    speakText(); // Tiếp tục đọc đoạn tiếp theo
+                    speakText();
                 } else {
                     isSpeaking = false;
                     currentParagraphIndex = 0;
                     start = 0;
                     end = paragraphs.length > 0 ? paragraphs[0].length() : 0;
                     runOnUiThread(() -> {
-                        speakButton.setEnabled(true);
-                        stopButton.setEnabled(false);
+                        updateSpeakButtonState();
                         seekBar.setProgress(0);
                     });
                 }
@@ -101,20 +116,23 @@ public class ChapterActivity extends AppCompatActivity {
             @Override
             public void onError(String utteranceId) {
                 Log.e("ChapterActivity", "TextToSpeech error: " + utteranceId);
-                runOnUiThread(() -> Toast.makeText(ChapterActivity.this, "Lỗi đọc văn bản", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> {
+                    Toast.makeText(ChapterActivity.this, "Lỗi đọc văn bản", Toast.LENGTH_SHORT).show();
+                    isSpeaking = false;
+                    updateSpeakButtonState();
+                });
             }
         });
 
-        // Thiết lập sự kiện cho nút
-        speakButton.setOnClickListener(v -> speakText());
-        stopButton.setEnabled(false);
-        stopButton.setOnClickListener(v -> {
-            stopSpeaking();
-            speakButton.setEnabled(true);
-            stopButton.setEnabled(false);
+        speakButton.setOnClickListener(v -> {
+            if (isSpeaking) {
+                stopSpeaking();
+            } else {
+                speakText();
+            }
+            updateSpeakButtonState();
         });
 
-        // Thiết lập SeekBar
         seekBar.setMax(paragraphs.length - 1);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -138,29 +156,44 @@ public class ChapterActivity extends AppCompatActivity {
             }
         });
 
-        // Tải dữ liệu từ API
         loadChapterContent();
+
+        Log.e("ChapterActivity", "previousChapterId: " + previousChapterId);
+        Log.e("ChapterActivity", "nextChapterId: " + nextChapterId);
+
+        nextButton.setOnClickListener(v -> {
+            Intent i = new Intent(ChapterActivity.this, ChapterActivity.class);
+            i.putExtra("book_id", bookId);
+            i.putExtra("chapter_id", nextChapterId);
+            i.putExtra("chapters", intent.getParcelableArrayListExtra("chapters"));
+            startActivity(i);
+        });
+        previousButton.setOnClickListener(v -> {
+            Intent i = new Intent(ChapterActivity.this, ChapterActivity.class);
+            i.putExtra("book_id", bookId);
+            i.putExtra("chapter_id", previousChapterId);
+            i.putExtra("chapters", intent.getParcelableArrayListExtra("chapters"));
+            startActivity(i);
+        });
     }
 
     private void loadChapterContent() {
-        fullText = "Chương " + chapterId + " ";
+
         NovelChapterRepository repository = new NovelChapterRepository();
         repository.getNovelChapter(bookId, chapterId).observe(this, novelChapter -> {
-            if (novelChapter != null && novelChapter.getContent() != null) {
+            if (novelChapter.getContent() != null) {
                 fullText += novelChapter.getContent();
                 fullText = fullText.replace(". ", ".\n");
-                Log.d("ChapterActivity", "fullText updated: " + fullText);
                 updateTextView();
             } else {
                 Log.e("ChapterActivity", "novelChapter hoặc content là null");
                 Toast.makeText(this, "Không thể tải nội dung chương", Toast.LENGTH_SHORT).show();
-                updateTextView(); // Cập nhật với fullText hiện tại
+                updateTextView();
             }
         });
     }
 
     private void updateTextView() {
-        // Cập nhật TextView và paragraphs
         spannableText = new SpannableString(fullText);
         textView.setText(spannableText);
         paragraphs = fullText.split("\n");
@@ -181,14 +214,11 @@ public class ChapterActivity extends AppCompatActivity {
             return;
         }
 
-        speakButton.setEnabled(false);
-        stopButton.setEnabled(true);
         isSpeaking = true;
-
         if (currentParagraphIndex < paragraphs.length) {
             start = 0;
             for (int i = 0; i < currentParagraphIndex; i++) {
-                start += paragraphs[i].length() + 1; // +1 cho ký tự \n
+                start += paragraphs[i].length() + 1;
             }
             end = start + paragraphs[currentParagraphIndex].length();
             highlightsParagraph(start, end);
@@ -209,13 +239,29 @@ public class ChapterActivity extends AppCompatActivity {
     }
 
     private void highlightsParagraph(int start, int end) {
-        spannableText.setSpan(new BackgroundColorSpan(Color.YELLOW), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        boolean isDarkMode = nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+        int highlightColor = isDarkMode ? Color.WHITE : Color.YELLOW;
+        int textColor = Color.BLACK;
+        textColor2 = isDarkMode ? Color.WHITE : Color.BLACK;
+
+        spannableText.setSpan(new BackgroundColorSpan(highlightColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableText.setSpan(new ForegroundColorSpan(textColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannableText);
     }
 
     private void cleanHighLight(int start, int end) {
         spannableText.setSpan(new BackgroundColorSpan(Color.TRANSPARENT), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableText.setSpan(new ForegroundColorSpan(textColor2), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannableText);
+    }
+
+    private void updateSpeakButtonState() {
+        if (isSpeaking) {
+            speakButton.setBackgroundResource(R.drawable.ic_pause);
+        } else {
+            speakButton.setBackgroundResource(R.drawable.ic_play);
+        }
     }
 
     @Override

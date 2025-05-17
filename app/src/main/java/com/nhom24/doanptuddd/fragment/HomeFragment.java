@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
     private void initDataFromApi() {
         NovelRepository novelRepository = new NovelRepository();
         LiveData<List<Novel>> books = novelRepository.getNovels();
+        progressBar.setVisibility(View.VISIBLE);
         books.observe(getViewLifecycleOwner(), novelList -> {
             if (novelList != null) {
                 bookAdapter.updateBooks(novelList);

@@ -60,7 +60,7 @@
                 android:background="@drawable/avatar_border"
                 android:contentDescription="Avatar"
                 android:scaleType="centerCrop"
-                android:src="@drawable/avatar" />
+                android:src="@drawable/img_avatar" />
         </androidx.cardview.widget.CardView>
         <!-- Thông tin cơ bản -->
         <TextView
