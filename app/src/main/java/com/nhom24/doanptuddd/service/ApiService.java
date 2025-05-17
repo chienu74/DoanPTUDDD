@@ -46,7 +46,7 @@ public interface ApiService {
     Call<ComicDetailResponse> getComicDetail(@Path("id") String id);
 
     @GET("comics/{comicId}/chapters/{chapterId}/images")
-    Call<ChapterResponse.ChapterImageResponse> getChapterImages(@Path("chapterId") String chapterId, @Path("comicId") String comicId);
+    Call<ChapterResponse.ChapterImageResponse> getChapterImages(@Path("comicId") String comicId, @Path("chapterId") String chapterId);
 
     //
 
