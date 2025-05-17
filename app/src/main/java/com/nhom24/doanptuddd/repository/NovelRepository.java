@@ -75,11 +75,10 @@ public class NovelRepository {
         service.getNovelById(bookId).enqueue(new Callback<NovelResponse>() {
             @Override
             public void onResponse(Call<NovelResponse> call, Response<NovelResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    NovelResponse novelResponse = response.body();
-                    if (novelResponse.isSuccess()) {
-                        data.setValue(novelResponse.getData());
-                    }
+                if (response.isSuccessful()) {
+                    data.setValue(response.body().getData());
+                } else {
+                    data.setValue(null);
                 }
             }
 

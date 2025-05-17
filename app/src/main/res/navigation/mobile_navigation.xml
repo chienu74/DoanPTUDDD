@@ -13,18 +13,18 @@
 
     <fragment
         android:id="@+id/navigation_novel"
-        android:name="com.nhom24.doanptuddd.fragment.BlankFragment"
+        android:name="com.nhom24.doanptuddd.fragment.NovelFragment"
         android:label="@string/title_novel"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/fragment_novel" />
     <fragment
         android:id="@+id/navigation_comic"
-        android:name="com.nhom24.doanptuddd.fragment.BlankFragment"
+        android:name="com.nhom24.doanptuddd.fragment.ComicFragment"
         android:label="@string/title_comic"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/fragment_novel" />
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.nhom24.doanptuddd.fragment.BlankFragment"
+        android:name="com.nhom24.doanptuddd.fragment.NovelFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/fragment_novel" />
 
 </navigation>

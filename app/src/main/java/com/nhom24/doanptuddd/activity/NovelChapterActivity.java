@@ -26,7 +26,7 @@ import com.nhom24.doanptuddd.repository.NovelChapterRepository;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class ChapterActivity extends AppCompatActivity {
+public class NovelChapterActivity extends AppCompatActivity {
     private TextView textView;
     private ScrollView scrollView;
     private Button speakButton, nextButton, previousButton;
@@ -117,7 +117,7 @@ public class ChapterActivity extends AppCompatActivity {
             public void onError(String utteranceId) {
                 Log.e("ChapterActivity", "TextToSpeech error: " + utteranceId);
                 runOnUiThread(() -> {
-                    Toast.makeText(ChapterActivity.this, "Lỗi đọc văn bản", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NovelChapterActivity.this, "Lỗi đọc văn bản", Toast.LENGTH_SHORT).show();
                     isSpeaking = false;
                     updateSpeakButtonState();
                 });
@@ -162,14 +162,14 @@ public class ChapterActivity extends AppCompatActivity {
         Log.e("ChapterActivity", "nextChapterId: " + nextChapterId);
 
         nextButton.setOnClickListener(v -> {
-            Intent i = new Intent(ChapterActivity.this, ChapterActivity.class);
+            Intent i = new Intent(NovelChapterActivity.this, NovelChapterActivity.class);
             i.putExtra("book_id", bookId);
             i.putExtra("chapter_id", nextChapterId);
             i.putExtra("chapters", intent.getParcelableArrayListExtra("chapters"));
             startActivity(i);
         });
         previousButton.setOnClickListener(v -> {
-            Intent i = new Intent(ChapterActivity.this, ChapterActivity.class);
+            Intent i = new Intent(NovelChapterActivity.this, NovelChapterActivity.class);
             i.putExtra("book_id", bookId);
             i.putExtra("chapter_id", previousChapterId);
             i.putExtra("chapters", intent.getParcelableArrayListExtra("chapters"));
@@ -178,18 +178,22 @@ public class ChapterActivity extends AppCompatActivity {
     }
 
     private void loadChapterContent() {
-
         NovelChapterRepository repository = new NovelChapterRepository();
         repository.getNovelChapter(bookId, chapterId).observe(this, novelChapter -> {
-            if (novelChapter.getContent() != null) {
-                fullText += novelChapter.getContent();
-                fullText = fullText.replace(". ", ".\n");
-                updateTextView();
+            if (novelChapter != null) {
+                String content = novelChapter.getContent();
+                if (content != null) {
+                    fullText += content;
+                    fullText = fullText.replace(". ", ".\n");
+                } else {
+                    Log.e("ChapterActivity", "Content is null");
+                    Toast.makeText(this, "Không thể tải nội dung chương", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Log.e("ChapterActivity", "novelChapter hoặc content là null");
+                Log.e("ChapterActivity", "novelChapter là null");
                 Toast.makeText(this, "Không thể tải nội dung chương", Toast.LENGTH_SHORT).show();
-                updateTextView();
             }
+            updateTextView();
         });
     }
 

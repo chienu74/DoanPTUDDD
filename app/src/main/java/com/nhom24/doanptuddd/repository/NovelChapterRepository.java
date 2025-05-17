@@ -1,10 +1,12 @@
 package com.nhom24.doanptuddd.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.nhom24.doanptuddd.model.NovelChapter;
-import com.nhom24.doanptuddd.response.ChapterResponse;
+import com.nhom24.doanptuddd.response.NovelChapterResponse;
 import com.nhom24.doanptuddd.service.ApiService;
 import com.nhom24.doanptuddd.service.RetrofitClient;
 
@@ -21,22 +23,28 @@ public class NovelChapterRepository {
 
     public LiveData<NovelChapter> getNovelChapter(int bookId, int chapterId) {
         MutableLiveData<NovelChapter> data = new MutableLiveData<>();
-        service.getNovelChapter(bookId, chapterId).enqueue(new Callback<ChapterResponse>() {
+        service.getNovelChapter(bookId, chapterId).enqueue(new Callback<>() {
+
             @Override
-            public void onResponse(Call<ChapterResponse> call, Response<ChapterResponse> response) {
-                if (response.isSuccessful()) {
-                    ChapterResponse chapterResponse = response.body();
-                    if (chapterResponse != null && chapterResponse.isSuccess()) {
-                        data.setValue(chapterResponse.getData());
+            public void onResponse(Call<NovelChapterResponse> call, Response<NovelChapterResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    NovelChapter chapter = response.body().getData();
+                    if (chapter != null) {
+                        data.setValue(chapter);
+                    } else {
+                        data.setValue(null);
+                        Log.e("NovelChapterRepository", "Chapter data is null");
                     }
                 } else {
                     data.setValue(null);
+                    Log.e("NovelChapterRepository", "Response unsuccessful or body is null");
                 }
             }
 
             @Override
-            public void onFailure(Call<ChapterResponse> call, Throwable t) {
+            public void onFailure(Call<NovelChapterResponse> call, Throwable t) {
                 data.setValue(null);
+                Log.e("NovelChapterRepository", "Error: " + t.getMessage());
             }
         });
         return data;

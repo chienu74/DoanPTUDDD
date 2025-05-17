@@ -21,15 +21,14 @@ import com.nhom24.doanptuddd.repository.NovelRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-public class BookDetailActivity extends AppCompatActivity {
+public class NovelDetailActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView textView, txt_author_detail, txt_time_detail, txt_description_detail;
     private Button btn_first_chapter, btn_last_chapter;
-    private int bookId, chapterId,firtChapterId, lastChapterId;
+    private int bookId, chapterId, firtChapterId, lastChapterId;
     private RecyclerView recyclerView;
     private NovelChapterAdapter novelChapterAdapter;
     private ProgressBar progressBar;
@@ -51,7 +50,7 @@ public class BookDetailActivity extends AppCompatActivity {
         btn_first_chapter = findViewById(R.id.btn_firt_chapter);
         btn_last_chapter = findViewById(R.id.btn_last_chapter);
 
-        intent = new Intent(BookDetailActivity.this, ChapterActivity.class);
+        intent = new Intent(NovelDetailActivity.this, NovelChapterActivity.class);
         stringToDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -110,8 +109,8 @@ public class BookDetailActivity extends AppCompatActivity {
     private void initDataChapter(List<NovelChapter> chapters) {
         firtChapterId = chapters.get(0).getId();
         lastChapterId = chapters.get(chapters.size() - 1).getId();
-        Log.e("BookDetailActivity", "firtChapterId: "+firtChapterId);
-        Log.e("BookDetailActivity", "lastChapterId: "+lastChapterId);
+        Log.e("BookDetailActivity", "firtChapterId: " + firtChapterId);
+        Log.e("BookDetailActivity", "lastChapterId: " + lastChapterId);
         novelChapterAdapter = new NovelChapterAdapter(chapters, bookId);
         recyclerView.setAdapter(novelChapterAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

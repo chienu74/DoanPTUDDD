@@ -1,6 +1,5 @@
 package com.nhom24.doanptuddd.response;
 
-import com.nhom24.doanptuddd.model.Novel;
 import com.nhom24.doanptuddd.model.NovelChapter;
 
 public class ChapterResponse {
@@ -21,5 +20,22 @@ public class ChapterResponse {
 
     public void setData(NovelChapter data) {
         this.data = data;
+    }
+
+    public static class ChapterImageResponse {
+        private boolean success;
+        private Data data;
+
+        public boolean isSuccess() { return success; }
+        public void setSuccess(boolean success) { this.success = success; }
+        public Data getData() { return data; }
+        public void setData(Data data) { this.data = data; }
+
+        public static class Data {
+            private String imgUrl; // JSON string array
+
+            public String getImgUrl() { return imgUrl; }
+            public void setImgUrl(String imgUrl) { this.imgUrl = imgUrl; }
+        }
     }
 }

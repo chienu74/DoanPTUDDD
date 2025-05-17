@@ -16,14 +16,12 @@ import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.adapter.NovelAdapter;
 import com.nhom24.doanptuddd.model.Novel;
 import com.nhom24.doanptuddd.repository.NovelRepository;
-import com.nhom24.doanptuddd.viewmodel.BookViewModel;
 
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView1;
     private NovelAdapter bookAdapter;
-    private BookViewModel viewModel;
     private ProgressBar progressBar;
 
     @Override
@@ -32,9 +30,6 @@ public class HomeFragment extends Fragment {
 
         recyclerView1 = view.findViewById(R.id.rcv_fr_home1);
         progressBar = view.findViewById(R.id.progressBar);
-        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        bookAdapter = new NovelAdapter(null);
-        recyclerView1.setAdapter(bookAdapter);
 
         initDataFromApi();
 
@@ -47,8 +42,9 @@ public class HomeFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         books.observe(getViewLifecycleOwner(), novelList -> {
             if (novelList != null) {
-                bookAdapter.updateBooks(novelList);
-                bookAdapter.notifyDataSetChanged();
+                bookAdapter = new NovelAdapter(novelList);
+                recyclerView1.setAdapter(bookAdapter);
+                recyclerView1.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
                 progressBar.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getContext(), "Không thể tải danh sách sách", Toast.LENGTH_SHORT).show();

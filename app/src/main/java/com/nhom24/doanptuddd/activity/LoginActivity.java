@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nhom24.doanptuddd.R;
-import com.nhom24.doanptuddd.service.ApiService;
 import com.nhom24.doanptuddd.response.ApiResponse;
+import com.nhom24.doanptuddd.service.ApiService;
 import com.nhom24.doanptuddd.model.User;
 
 import retrofit2.Call;
@@ -21,7 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText emailInput, passwordInput;
     private Button loginButton;
@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity {
                             ApiResponse apiResponse = response.body();
                             if (apiResponse.isSuccess()) {
                                 // Đăng nhập thành công
-                                Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 // Chuyển sang màn hình chính
 //                                startActivity(new Intent(Login.this, HomeActivity.class));
@@ -89,10 +89,13 @@ public class Login extends AppCompatActivity {
                                 loginButton.setEnabled(true);
                                 loginButton.setText("Đăng nhập"); // Ẩn text trên nút
                                 loginProgressBar.setVisibility(View.VISIBLE);
-                                Toast.makeText(Login.this, apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, apiResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(Login.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                            loginButton.setEnabled(true);
+                            loginButton.setText("Đăng nhập"); // Ẩn text trên nút
+                            loginProgressBar.setVisibility(View.VISIBLE);
                         }
                     }
 
@@ -101,7 +104,7 @@ public class Login extends AppCompatActivity {
                         loginButton.setEnabled(true);
                         loginButton.setText("Đăng nhập"); // Ẩn text trên nút
                         loginProgressBar.setVisibility(View.VISIBLE);
-                        Toast.makeText(Login.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

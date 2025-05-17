@@ -10,9 +10,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nhom24.doanptuddd.R;
-import com.nhom24.doanptuddd.service.ApiService;
-import com.nhom24.doanptuddd.response.ApiResponse;
 import com.nhom24.doanptuddd.model.User;
+import com.nhom24.doanptuddd.response.ApiResponse;
+import com.nhom24.doanptuddd.service.ApiService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,7 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText accountNameEditText, gmailEditText, passwordEditText, retypePasswordEditText;
     private Button registerButton;
@@ -88,14 +88,14 @@ public class Register extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Register.this, Login.class));
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     finish();
                 } else {
                     registerButton.setEnabled(true);
                     registerButton.setText("Đăng ký");
                     registerProgressBar.setVisibility(View.GONE);
-                    Toast.makeText(Register.this, "Đăng ký thất bại! Lỗi: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thất bại! Lỗi: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -104,7 +104,7 @@ public class Register extends AppCompatActivity {
                 registerButton.setEnabled(true);
                 registerButton.setText("Đăng ký");
                 registerProgressBar.setVisibility(View.GONE);
-                Toast.makeText(Register.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -6,17 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.nhom24.doanptuddd.R;
-import com.nhom24.doanptuddd.activity.BookDetailActivity;
+import com.nhom24.doanptuddd.activity.NovelDetailActivity;
 import com.nhom24.doanptuddd.model.Novel;
+
 import java.util.List;
 
-public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.BookViewHolder> {
-    private List<Novel> bookList;
+public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelViewHolder> {
+    private final List<Novel> bookList;
 
     public NovelAdapter(List<Novel> bookList) {
         this.bookList = bookList;
@@ -24,14 +27,14 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.BookViewHold
 
     @NonNull
     @Override
-    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NovelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_book, parent, false);
-        return new BookViewHolder(view);
+                .inflate(R.layout.item_comic, parent, false);
+        return new NovelViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NovelViewHolder holder, int position) {
         Novel book = bookList.get(position);
         holder.textViewBookName.setText(book.getTitle());
 
@@ -40,13 +43,11 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.BookViewHold
                 .placeholder(R.drawable.img_logo)
                 .error(R.drawable.img_logo)
                 .into(holder.imageViewBook);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), BookDetailActivity.class);
-                intent.putExtra("book_id", book.getId());
-                v.getContext().startActivity(intent);
-            }
+
+        holder.cardView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), NovelDetailActivity.class);
+            intent.putExtra("book_id", book.getId());
+            v.getContext().startActivity(intent);
         });
     }
 
@@ -55,17 +56,12 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.BookViewHold
         return bookList != null ? bookList.size() : 0;
     }
 
-    public void updateBooks(List<Novel> books) {
-        this.bookList = books;
-        notifyDataSetChanged();
-    }
-
-    static class BookViewHolder extends RecyclerView.ViewHolder {
+    public static class NovelViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewBook;
         TextView textViewBookName;
         CardView cardView;
 
-        public BookViewHolder(@NonNull View itemView) {
+        public NovelViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewBook = itemView.findViewById(R.id.img_book);
             textViewBookName = itemView.findViewById(R.id.txt_book_name);

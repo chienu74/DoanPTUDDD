@@ -4,24 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:id="@+id/layout_item_chapter"
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/chapter_number"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/chapter_title"
+        android:id="@+id/comment_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/updated_at"
+        android:id="@+id/created_at"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
