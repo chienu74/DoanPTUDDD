@@ -19,6 +19,7 @@ import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.Request.CommentRequest;
 import com.nhom24.doanptuddd.adapter.ChapterAdapter;
 import com.nhom24.doanptuddd.adapter.CommentAdapter;
+import com.nhom24.doanptuddd.helper.SessionManager;
 import com.nhom24.doanptuddd.model.ComicDetail;
 import com.nhom24.doanptuddd.model.Comment; // Assuming you have a Comment model
 import com.nhom24.doanptuddd.response.ComicDetailResponse;
@@ -125,7 +126,9 @@ public class ComicDetailActivity extends AppCompatActivity {
 
     private void postComment(String comicId, String commentText) {
         // Assuming ApiService has a method to post comments
-        String token ="Bearer "+ "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNzQ3NTY5NjU0fQ.rgGxnUwRZeA59tb1chHycgl73H79NQujUVUEU0-vvko";
+        SessionManager sessionManager=new SessionManager(this);
+        String s =sessionManager.getToken();
+        String token ="Bearer "+ s;
         CommentRequest request = new CommentRequest(commentText);
         Log.d("API", "Gửi bình luận: " + request);
         Call<CommentResponse> call = ApiService.comicAPIServer.postComment(comicId, request, token);

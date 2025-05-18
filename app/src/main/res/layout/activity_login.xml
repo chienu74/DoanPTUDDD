@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".MainActivity">
+    tools:context=".activity.LoginActivity">
 
     <!-- Tiêu đề -->
     <TextView
@@ -31,48 +31,17 @@
         android:textSize="16sp" />
 
     <!-- Trường nhập Tài khoản/Email -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_layout"
+    <EditText
+        android:id="@+id/email_input"
+        android:hint="Tài khoản/Email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="#1E88E5"
-        app:hintTextColor="#1E88E5">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tài khoản/Email"
-            android:fontFamily="sans-serif"
-            android:textColor="#1E88E5"
-            android:textSize="16sp"
-            android:padding="12dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Trường nhập Mật khẩu -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_layout"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/password_input"
+        android:hint="Mật khẩu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="#1E88E5"
-        app:hintTextColor="#1E88E5"
-        app:endIconMode="password_toggle">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
-            android:fontFamily="sans-serif"
-            android:textColor="#1E88E5"
-            android:textSize="16sp"
-            android:padding="12dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="wrap_content"/>
+ 
 
     <!-- Checkbox và Quên mật khẩu -->
     <LinearLayout

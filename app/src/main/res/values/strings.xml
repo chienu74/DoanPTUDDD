@@ -18,4 +18,6 @@
     <string name="title_account">Tài khoản</string>
     <string name="title_novel">Tiểu thuyết</string>
     <string name="title_comic">Truyện tranh</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>

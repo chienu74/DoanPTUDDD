@@ -1,5 +1,6 @@
 package com.nhom24.doanptuddd.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -86,7 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 // Chuyển sang màn hình chính
-//                                startActivity(new Intent(Login.this, HomeActivity.class));
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+
                                 finish();
                             } else {
                                 // Thất bại
