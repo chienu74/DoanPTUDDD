@@ -11,13 +11,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.model.Comment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private final List<Comment> commentList;
 
     public CommentAdapter(List<Comment> commentList) {
-        this.commentList = commentList;
+        this.commentList = commentList != null ? commentList : new ArrayList<>();
+    }
+
+    // Add a new comment and notify RecyclerView
+    public void addComment(Comment comment) {
+        if (comment != null) {
+            commentList.add(0, comment); // Add to top
+            notifyItemInserted(0);
+            notifyDataSetChanged(); // Ensure UI updates
+        }
     }
 
     @NonNull

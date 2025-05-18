@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.nhom24.doanptuddd.helper.SessionManager;
 
 import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.response.ApiResponse;
@@ -79,6 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                             ApiResponse apiResponse = response.body();
                             if (apiResponse.isSuccess()) {
                                 // Đăng nhập thành công
+                                String token = apiResponse.getToken();
+                                SessionManager sessionManager = new SessionManager(LoginActivity.this);
+                                sessionManager.saveToken(token);
                                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 // Chuyển sang màn hình chính
