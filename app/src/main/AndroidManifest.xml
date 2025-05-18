@@ -37,9 +37,9 @@
         <activity
             android:name=".activity.NovelDetailActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.ComicActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".activity.ComicActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".activity.ComicDetailActivity"
             android:exported="false" />

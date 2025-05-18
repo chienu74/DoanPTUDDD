@@ -90,9 +90,23 @@
                 android:textSize="16sp"
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLines="4"
-                android:gravity="top|start"
-                />
+                android:gravity="top|start" />
 
+            <Button
+                android:id="@+id/comment_button123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="10dp"
+                android:text="Gửi"
+                android:textColor="#FFC107"
+                android:textSize="16sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@drawable/bg_border_rounded"
+                android:elevation="2dp"
+                android:textAllCaps="false" />
             <!-- Comments RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comments_recycler_view"
