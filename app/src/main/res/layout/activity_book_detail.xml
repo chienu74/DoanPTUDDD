@@ -149,10 +149,22 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/b_nh_lu_n" />
+        <EditText
+            android:id="@+id/edt_post_comment"
+            android:hint="Nhập bình luận"
+            android:gravity="top|start"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
+        <Button
+            android:id="@+id/btn_post_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng bình luận" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_comment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </ScrollView>

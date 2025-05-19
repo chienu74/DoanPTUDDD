@@ -10,6 +10,7 @@ import com.nhom24.doanptuddd.response.ChapterResponse;
 import com.nhom24.doanptuddd.response.ComicDetailResponse;
 import com.nhom24.doanptuddd.response.ComicResponse;
 import com.nhom24.doanptuddd.response.NovelChapterResponse;
+import com.nhom24.doanptuddd.response.NovelListCommentResponse;
 import com.nhom24.doanptuddd.response.NovelListResponse;
 import com.nhom24.doanptuddd.response.NovelResponse;
 import com.nhom24.doanptuddd.response.CommentResponse;
@@ -60,7 +61,7 @@ public interface ApiService {
             @Body CommentRequest request,
             @Header("Authorization") String token
     );
-
+//
     @GET("novels")
     Call<NovelListResponse> getNovels();
 
@@ -69,6 +70,16 @@ public interface ApiService {
 
     @GET("novels/{novelId}/chapter/{novelChapterId}")
     Call<NovelChapterResponse> getNovelChapter(@Path("novelId") int novelId, @Path("novelChapterId") int novelChapterId);
+
+    @POST("novels/{novelId}/comments")
+    Call<CommentResponse> postNovelComment(
+            @Path("novelId") String novelId,
+            @Body CommentRequest request,
+            @Header("Authorization") String token
+    );
+
+    @GET("novels/{novelId}/comments")
+    Call<NovelListCommentResponse> getNovelComment(@Path("novelId") int novelId);
 
     //
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,93 +19,93 @@
                 android:id="@+id/cover_image"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="Comic cover" />
+                android:contentDescription="Comic cover"
+                android:scaleType="centerCrop" />
 
             <!-- Comic Title -->
             <TextView
                 android:id="@+id/comic_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textStyle="bold"
                 android:layout_marginTop="16dp"
-                android:text="Comic Title" />
+                android:text="Comic Title"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <!-- Comic Details -->
             <TextView
                 android:id="@+id/comic_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:text="Chapter: 1080\nStatus: Ongoing\nAuthor: Unknown" />
+                android:text="Chapter: 1080\nStatus: Ongoing\nAuthor: Unknown"
+                android:textSize="16sp" />
 
             <!-- Stats -->
             <TextView
                 android:id="@+id/comic_stats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:layout_marginTop="8dp"
-                android:text="Likes: 150 | Followers: 250 | Views: 350" />
+                android:text="Likes: 150 | Followers: 250 | Views: 350"
+                android:textSize="16sp" />
 
             <!-- Chapters Header -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Chapters"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <!-- Chapters RecyclerView with Fixed Height -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chapters_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/recycler_border"
-            android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="true" />
+                android:nestedScrollingEnabled="true" />
 
             <!-- Comments Header -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Comments"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/comment_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="150dp"
-                android:padding="12dp"
-                android:hint="Nhập bình luận..."
-                android:textColor="@color/black"
                 android:background="@drawable/edittext_background"
-                android:textSize="16sp"
+                android:gravity="top|start"
+                android:hint="Nhập bình luận..."
                 android:inputType="textCapSentences|textMultiLine"
                 android:maxLines="4"
-                android:gravity="top|start" />
+                android:minHeight="150dp"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/comment_button123"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_gravity="bottom"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:text="Gửi"
-                android:textColor="#FFC107"
-                android:textSize="16sp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:background="@drawable/bg_border_rounded"
                 android:elevation="2dp"
-                android:textAllCaps="false" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Gửi"
+                android:textAllCaps="false"
+                android:textColor="#FFC107"
+                android:textSize="16sp" />
             <!-- Comments RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comments_recycler_view"

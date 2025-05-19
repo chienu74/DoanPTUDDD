@@ -61,6 +61,7 @@ public class ComicDetailActivity extends AppCompatActivity {
             return;
         }
 
+
         // Fetch comic details
         ApiService.comicAPIServer.getComicDetail(comicId).enqueue(new Callback<ComicDetailResponse>() {
             @Override

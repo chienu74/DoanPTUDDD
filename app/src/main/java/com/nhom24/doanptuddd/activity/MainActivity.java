@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_novel, R.id.navigation_comic, R.id.navigation_account)
+                R.id.navigation_home, R.id.navigation_novel,
+                R.id.navigation_comic, R.id.navigation_account)
                 .setOpenableLayout(drawerLayout)
                 .build();
 
