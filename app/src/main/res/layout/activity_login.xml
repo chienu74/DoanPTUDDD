@@ -8,18 +8,15 @@
     android:padding="24dp"
     tools:context=".activity.LoginActivity">
 
-    <!-- Tiêu đề -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chào mừng bạn 👋"
         android:fontFamily="sans-serif-medium"
+        android:text="Chào mừng bạn 👋"
         android:textColor="@android:color/black"
         android:textSize="30sp"
-        android:textFontWeight="700"
         android:textStyle="bold" />
 
-    <!-- Mô tả -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,29 +24,27 @@
         android:fontFamily="sans-serif"
         android:text="Vui lòng nhập Tài khoản/Email và mật khẩu để đăng nhập"
         android:textColor="#757575"
-        android:textFontWeight="400"
         android:textSize="16sp" />
 
-    <!-- Trường nhập Tài khoản/Email -->
     <EditText
         android:id="@+id/email_input"
-        android:hint="Tài khoản/Email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Tài khoản/Email" />
+
     <EditText
         android:id="@+id/password_input"
-        android:hint="Mật khẩu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
- 
+        android:layout_height="wrap_content"
+        android:hint="Mật khẩu" />
 
-    <!-- Checkbox và Quên mật khẩu -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/remember_me"
@@ -74,18 +69,18 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        >
+        android:layout_marginTop="16dp">
+
         <Button
             android:id="@+id/login_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:backgroundTint="#4796FB"
             android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Đăng nhập"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"
             app:cornerRadius="8dp" />
 
         <ProgressBar
@@ -93,24 +88,34 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:visibility="gone"
-            android:indeterminateTint="#FFFFFF" />
+            android:indeterminateTint="#FFFFFF"
+            android:visibility="gone" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/txt_register"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="Chưa có tài khoản? Đăng ký"
+        android:textColor="#1E88E5"
+        android:textSize="14sp" />
 
     <!-- Dòng "Hoặc" -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:background="#B0BEC5"
-            android:layout_marginEnd="8dp" />
+            android:background="#B0BEC5" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,9 +127,9 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="#B0BEC5"
-            android:layout_marginStart="8dp" />
+            android:background="#B0BEC5" />
     </LinearLayout>
 
     <!-- Nút đăng nhập bằng Facebook và Google -->
@@ -132,38 +137,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <!-- Nút Facebook -->
         <LinearLayout
             android:id="@+id/btn_facebook"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
             android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
+            android:layout_weight="1"
             android:background="@drawable/bg_border_rounded"
-            android:gravity="center"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:elevation="2dp"
             android:clickable="true"
-            android:focusable="true">
+            android:elevation="2dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_facebook"
-                android:contentDescription="Facebook Icon" />
+                android:contentDescription="Facebook Icon"
+                android:src="@drawable/ic_facebook" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="Facebook"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- Nút Google -->
@@ -171,31 +176,31 @@
             android:id="@+id/btn_google"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:layout_weight="1"
             android:background="@drawable/bg_border_rounded"
-            android:elevation="2dp"
             android:clickable="true"
-            android:focusable="true">
+            android:elevation="2dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_google"
-                android:contentDescription="Google Icon" />
+                android:contentDescription="Google Icon"
+                android:src="@drawable/ic_google" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="Google"
                 android:textColor="#424242"
-                android:textSize="14sp"
-                android:fontFamily="sans-serif-medium" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

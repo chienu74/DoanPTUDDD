@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.NovelChapterActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="@string/title_novel"
+            android:textSize="16sp" />
+
+    </ScrollView>
+
+    <SeekBar
+        android:id="@+id/sb_chapter"
+        android:progressTint="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_previous"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/ic_previous"
+                android:contentDescription="@string/c_v_n_b_n" />
+
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/ic_play"
+                android:contentDescription="@string/c_v_n_b_n" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/ic_next"
+                android:contentDescription="@string/c_v_n_b_n" />
+        </LinearLayout>
+
+        <Button
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/btn_settings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_settings" />
+    </LinearLayout>
+</LinearLayout>

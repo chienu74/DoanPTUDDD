@@ -34,15 +34,7 @@
             android:layout_marginBottom="24dp" />
 
         <!-- Tên tài khoản -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#4796FB"
-            app:hintTextColor="#4796FB"
-            app:startIconTint="#4796FB">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/accountNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,19 +44,10 @@
                 android:textColorHint="#666666"
                 android:fontFamily="sans-serif-medium"
                 android:padding="12dp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Email -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#4796FB"
-            app:hintTextColor="#4796FB"
-            app:startIconTint="#4796FB">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/gmailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,20 +57,9 @@
                 android:textColorHint="#666666"
                 android:fontFamily="sans-serif-medium"
                 android:padding="12dp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Mật khẩu -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#4796FB"
-            app:hintTextColor="#4796FB"
-            app:startIconTint="#4796FB"
-            app:endIconMode="password_toggle">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,20 +70,10 @@
                 android:fontFamily="sans-serif-medium"
                 android:padding="12dp"
                 android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Nhập lại mật khẩu -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxStrokeColor="#4796FB"
-            app:hintTextColor="#4796FB"
-            app:startIconTint="#4796FB"
-            app:endIconMode="password_toggle">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/retypePasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -122,7 +84,6 @@
                 android:fontFamily="sans-serif-medium"
                 android:padding="12dp"
                 android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Nút đăng ký với ProgressBar -->
         <FrameLayout

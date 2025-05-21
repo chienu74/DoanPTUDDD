@@ -66,4 +66,5 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation ("androidx.security:security-crypto:1.0.0")
+    implementation ("com.google.android.material:material:1.9.0")
 }

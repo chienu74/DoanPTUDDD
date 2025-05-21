@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailInput, passwordInput;
+    private TextView txtRegister;
     private Button loginButton;
     private ProgressBar loginProgressBar;
     private static final String BASE_URL = "https://comic.minhquancao0.workers.dev/api/";
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.password_input);
         loginButton = findViewById(R.id.login_button);
         loginProgressBar = findViewById(R.id.loginProgressBar);
+        txtRegister = findViewById(R.id.txt_register);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +117,13 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+        txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
