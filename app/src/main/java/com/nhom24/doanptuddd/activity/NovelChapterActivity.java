@@ -14,6 +14,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -36,8 +37,10 @@ public class NovelChapterActivity extends AppCompatActivity {
     private ScrollView scrollView;
     private Button speakButton, nextButton, previousButton, settingButton;
     private SeekBar seekBar;
+    private ProgressBar progressBar;
     private TextToSpeech textToSpeech;
 
+    private ArrayList<NovelChapter> chapters;
     private String fullText = "";
     private String[] paragraphs = new String[0];
     private SpannableString spannableText;
@@ -46,55 +49,45 @@ public class NovelChapterActivity extends AppCompatActivity {
     private int currentParagraphIndex = 0;
     private int start = 0;
     private int end = 0;
-    private int chapterId, bookId;
+    private int chapterId, novelId, indexChapterId;
     private int textColor2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novel_chapter);
-
-        textView = findViewById(R.id.tv_description);
-        scrollView = findViewById(R.id.scrollView);
-        speakButton = findViewById(R.id.btn_play);
-        seekBar = findViewById(R.id.sb_chapter);
-        nextButton = findViewById(R.id.btn_next);
-        previousButton = findViewById(R.id.btn_previous);
-        settingButton = findViewById(R.id.btn_settings);
+        initView();
 
         Intent intent = getIntent();
-        bookId = intent.getIntExtra("book_id", -1);
+        novelId = intent.getIntExtra("book_id", -1);
         chapterId = intent.getIntExtra("chapter_id", -1);
 
-        ArrayList<NovelChapter> chapters = intent.getParcelableArrayListExtra("chapters");
-        if (chapters != null) {
-            for (int i = 0; i < chapters.size(); i++) {
-                if (chapters.get(i).getId() == chapterId) {
-                    if (i == 0) {
-                        previousButton.setEnabled(false);
-                    }
-                    if (i > 0) {
-                        previousChapterId = chapters.get(i - 1).getId();
-                    }
-                    if (i < chapters.size() - 1) { // Chỉ truy cập next nếu không phải chapter cuối
-                        nextChapterId = chapters.get(i + 1).getId();
-                    } else {
-                        nextButton.setEnabled(false);
-                    }
-                    fullText += chapters.get(i).getTitle() + ". ";
-                    break;
-                }
+        chapters = intent.getParcelableArrayListExtra("chapters");
+        if (chapters == null || chapters.isEmpty()) {
+            Toast.makeText(this, "Không có danh sách chương", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        for (int i = 0; i < chapters.size(); i++) {
+            if (chapters.get(i).getId() == chapterId) {
+                indexChapterId = i;
+                fullText = chapters.get(i).getTitle() + ".\n";
+                updateButtonStates();
+                break;
             }
         }
 
         textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
-            if (status != TextToSpeech.ERROR) {
+            if (status == TextToSpeech.SUCCESS) {
                 textToSpeech.setLanguage(new Locale("vi", "VN"));
                 textToSpeech.setSpeechRate(1.0f);
             } else {
+                Toast.makeText(this, "Không thể khởi tạo TextToSpeech", Toast.LENGTH_SHORT).show();
                 Log.e("ChapterActivity", "TextToSpeech initialization failed");
             }
         });
+
         textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
@@ -109,14 +102,21 @@ public class NovelChapterActivity extends AppCompatActivity {
                     seekBar.setProgress(currentParagraphIndex);
                     speakText();
                 } else {
-                    isSpeaking = false;
-                    currentParagraphIndex = 0;
-                    start = 0;
-                    end = paragraphs.length > 0 ? paragraphs[0].length() : 0;
-                    runOnUiThread(() -> {
-                        updateSpeakButtonState();
-                        seekBar.setProgress(0);
-                    });
+                    if (indexChapterId < chapters.size() - 1 && isSpeaking) {
+                        runOnUiThread(() -> loadNextChapter());
+                    } else {
+                        isSpeaking = false;
+                        currentParagraphIndex = 0;
+                        start = 0;
+                        end = paragraphs.length > 0 ? paragraphs[0].length() : 0;
+                        runOnUiThread(() -> {
+                            updateSpeakButtonState();
+                            seekBar.setProgress(0);
+                            if (indexChapterId >= chapters.size() - 1) {
+                                Toast.makeText(NovelChapterActivity.this, "Đã đọc hết truyện", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
             }
 
@@ -140,7 +140,6 @@ public class NovelChapterActivity extends AppCompatActivity {
             updateSpeakButtonState();
         });
 
-        seekBar.setMax(paragraphs.length - 1);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -163,76 +162,120 @@ public class NovelChapterActivity extends AppCompatActivity {
             }
         });
 
-        loadChapterContent();
+        settingButton.setOnClickListener(v -> {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment existingFragment = fragmentManager.findFragmentByTag("BottomSheetFragment");
+            if (existingFragment == null) {
+                float currentSpeed = 1.0f;
+                SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
+                currentSpeed = prefs.getFloat("speech_rate", 1.0f);
+                BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(currentSpeed);
+                bottomSheet.setOnSpeedChangeListener(speed -> {
+                    stopSpeaking();
+                    textToSpeech.setSpeechRate(speed);
+                    speakText();
 
-        Log.e("ChapterActivity", "previousChapterId: " + previousChapterId);
-        Log.e("ChapterActivity", "nextChapterId: " + nextChapterId);
-
-        nextButton.setOnClickListener(v -> {
-            Intent i = new Intent(NovelChapterActivity.this, NovelChapterActivity.class);
-            i.putExtra("book_id", bookId);
-            i.putExtra("chapter_id", nextChapterId);
-            i.putExtra("chapters", intent.getParcelableArrayListExtra("chapters"));
-            startActivity(i);
-        });
-        previousButton.setOnClickListener(v -> {
-            Intent i = new Intent(NovelChapterActivity.this, NovelChapterActivity.class);
-            i.putExtra("book_id", bookId);
-            i.putExtra("chapter_id", previousChapterId);
-            i.putExtra("chapters", intent.getParcelableArrayListExtra("chapters"));
-            startActivity(i);
-        });
-        settingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                Fragment existingFragment = fragmentManager.findFragmentByTag("BottomSheetFragment");
-                if (existingFragment == null) {
-                    float currentSpeed = 1.0f;
-                    SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
-                    currentSpeed = prefs.getFloat("speech_rate", 1.0f);
-                    BottomSheetFragment bottomSheet = BottomSheetFragment.newInstance(currentSpeed);
-                    bottomSheet.setOnSpeedChangeListener(speed -> {
-                        stopSpeaking();
-                        textToSpeech.setSpeechRate(speed);
-                        speakText();
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putFloat("speech_rate", speed);
-                        editor.apply();
-                    });
-                    bottomSheet.show(fragmentManager, "BottomSheetFragment");
-                } else {
-                    Log.d("ChapterActivity", "Bottom Sheet is already shown");
-                }
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putFloat("speech_rate", speed);
+                    editor.apply();
+                });
+                bottomSheet.show(fragmentManager, "BottomSheetFragment");
+            } else {
+                Log.d("ChapterActivity", "Bottom Sheet is already shown");
             }
         });
+
+        nextButton.setOnClickListener(v -> {
+            stopSpeaking();
+            if (indexChapterId < chapters.size() - 1) {
+                chapterId = nextChapterId;
+                indexChapterId++;
+                fullText = chapters.get(indexChapterId).getTitle() + ".\n";
+                updateButtonStates();
+                loadChapterContent();
+            }
+        });
+
+        previousButton.setOnClickListener(v -> {
+            stopSpeaking();
+            if (indexChapterId > 0) {
+                chapterId = previousChapterId;
+                indexChapterId--;
+                fullText = chapters.get(indexChapterId).getTitle() + ".\n";
+                updateButtonStates();
+                loadChapterContent();
+            }
+        });
+
+        loadChapterContent();
+    }
+
+    private void initView() {
+        textView = findViewById(R.id.tv_description);
+        scrollView = findViewById(R.id.scrollView);
+        speakButton = findViewById(R.id.btn_play);
+        seekBar = findViewById(R.id.sb_chapter);
+        nextButton = findViewById(R.id.btn_next);
+        previousButton = findViewById(R.id.btn_previous);
+        settingButton = findViewById(R.id.btn_settings);
+        progressBar = findViewById(R.id.progress_bar_novel_chapter);
+
+        speakButton.setContentDescription("Phát đọc");
+        nextButton.setContentDescription("Chương tiếp theo");
+        previousButton.setContentDescription("Chương trước");
+        settingButton.setContentDescription("Cài đặt");
+    }
+
+    private void updateButtonStates() {
+        previousButton.setEnabled(indexChapterId > 0);
+        nextButton.setEnabled(indexChapterId < chapters.size() - 1);
+        previousChapterId = indexChapterId > 0 ? chapters.get(indexChapterId - 1).getId() : -1;
+        nextChapterId = indexChapterId < chapters.size() - 1 ? chapters.get(indexChapterId + 1).getId() : -1;
+        Log.d("ChapterActivity", "previousChapterId: " + previousChapterId + ", nextChapterId: " + nextChapterId);
     }
 
     private void loadChapterContent() {
+        progressBar.setVisibility(View.VISIBLE);
         NovelChapterRepository repository = new NovelChapterRepository();
-        repository.getNovelChapter(bookId, chapterId).observe(this, novelChapter -> {
-            if (novelChapter != null) {
-                String content = novelChapter.getContent();
-                if (content != null) {
-                    fullText += content;
-                    fullText = fullText.replace(". ", ".\n");
-                } else {
-                    Log.e("ChapterActivity", "Content is null");
-                    Toast.makeText(this, "Không thể tải nội dung chương", Toast.LENGTH_SHORT).show();
-                }
+        repository.getNovelChapter(novelId, chapterId).observe(this, novelChapter -> {
+            progressBar.setVisibility(View.GONE);
+            if (novelChapter != null && novelChapter.getContent() != null) {
+                fullText += novelChapter.getContent();
+                fullText = fullText.replace(". ", ".\n");
+                updateTextView();
             } else {
-                Log.e("ChapterActivity", "novelChapter là null");
+                Log.e("ChapterActivity", "novelChapter hoặc nội dung là null");
                 Toast.makeText(this, "Không thể tải nội dung chương", Toast.LENGTH_SHORT).show();
             }
-            updateTextView();
         });
     }
 
+    private void loadNextChapter() {
+        if (indexChapterId < chapters.size() - 1) {
+            chapterId = nextChapterId;
+            indexChapterId++;
+            fullText = chapters.get(indexChapterId).getTitle() + ".\n";
+            updateButtonStates();
+            loadChapterContent();
+            currentParagraphIndex = 0;
+            seekBar.setProgress(0);
+        }
+    }
+
     private void updateTextView() {
+        if (fullText.isEmpty()) {
+            Toast.makeText(this, "Nội dung trống", Toast.LENGTH_SHORT).show();
+            paragraphs = new String[]{""};
+            seekBar.setMax(0);
+            spannableText = new SpannableString("");
+            textView.setText(spannableText);
+            return;
+        }
+
         spannableText = new SpannableString(fullText);
         textView.setText(spannableText);
-        paragraphs = fullText.split("\n");
-        seekBar.setMax(paragraphs.length - 1);
+        paragraphs = fullText.split("\n+");
+        seekBar.setMax(Math.max(0, paragraphs.length - 1));
         if (paragraphs.length > 0) {
             end = paragraphs[0].length();
         }
@@ -241,11 +284,13 @@ public class NovelChapterActivity extends AppCompatActivity {
     private void stopSpeaking() {
         textToSpeech.stop();
         isSpeaking = false;
+        updateSpeakButtonState();
     }
 
     private void speakText() {
-        if (paragraphs.length == 0) {
+        if (paragraphs.length == 0 || paragraphs[0].isEmpty()) {
             Toast.makeText(this, "Không có nội dung để đọc", Toast.LENGTH_SHORT).show();
+            stopSpeaking();
             return;
         }
 
@@ -257,15 +302,15 @@ public class NovelChapterActivity extends AppCompatActivity {
             }
             end = start + paragraphs[currentParagraphIndex].length();
             highlightsParagraph(start, end);
-
-            textToSpeech.speak(paragraphs[currentParagraphIndex], TextToSpeech.QUEUE_FLUSH, null, "utterance_" + currentParagraphIndex);
+            textToSpeech.speak(paragraphs[currentParagraphIndex], TextToSpeech.QUEUE_FLUSH, null,
+                    chapterId + "_utterance_" + currentParagraphIndex);
             scrollToSentence(currentParagraphIndex);
         }
     }
 
     private void scrollToSentence(int currentParagraphIndex) {
         textView.post(() -> {
-            if (textView.getLayout() != null) {
+            if (textView.getLayout() != null && start < spannableText.length()) {
                 int line = textView.getLayout().getLineForOffset(start);
                 int y = textView.getLayout().getLineTop(line);
                 scrollView.smoothScrollTo(0, y);
@@ -274,11 +319,13 @@ public class NovelChapterActivity extends AppCompatActivity {
     }
 
     private void highlightsParagraph(int start, int end) {
+        if (start >= spannableText.length() || end > spannableText.length()) return;
+
         int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         boolean isDarkMode = nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
-        int highlightColor = isDarkMode ? Color.WHITE : Color.YELLOW;
-        int textColor = Color.BLACK;
-        textColor2 = isDarkMode ? Color.WHITE : Color.BLACK;
+        int highlightColor = isDarkMode ? getResources().getColor(R.color.highlight_dark, null) : getResources().getColor(R.color.highlight_light, null);
+        int textColor = isDarkMode ? Color.WHITE : Color.BLACK;
+        textColor2 = textColor;
 
         spannableText.setSpan(new BackgroundColorSpan(highlightColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableText.setSpan(new ForegroundColorSpan(textColor), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -286,17 +333,16 @@ public class NovelChapterActivity extends AppCompatActivity {
     }
 
     private void cleanHighLight(int start, int end) {
+        if (start >= spannableText.length() || end > spannableText.length()) return;
+
         spannableText.setSpan(new BackgroundColorSpan(Color.TRANSPARENT), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableText.setSpan(new ForegroundColorSpan(textColor2), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannableText);
     }
 
     private void updateSpeakButtonState() {
-        if (isSpeaking) {
-            speakButton.setBackgroundResource(R.drawable.ic_pause);
-        } else {
-            speakButton.setBackgroundResource(R.drawable.ic_play);
-        }
+        speakButton.setBackgroundResource(isSpeaking ? R.drawable.ic_pause : R.drawable.ic_play);
+        speakButton.setContentDescription(isSpeaking ? "Tạm dừng đọc" : "Phát đọc");
     }
 
     @Override

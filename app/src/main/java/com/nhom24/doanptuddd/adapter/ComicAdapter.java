@@ -73,8 +73,6 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
             tvTime = itemView.findViewById(R.id.tv_time);
             tvNewLabel = itemView.findViewById(R.id.tv_new_label);
             tvFullLabel = itemView.findViewById(R.id.tv_full_label);
-
-
         }
     }
 }

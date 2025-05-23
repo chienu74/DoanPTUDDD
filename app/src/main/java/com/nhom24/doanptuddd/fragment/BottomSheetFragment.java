@@ -1,6 +1,7 @@
 package com.nhom24.doanptuddd.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,23 +35,26 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.layout_bottom_sheet, container, false);
 
         Button closeButton = view.findViewById(R.id.button_close);
+        SeekBar seekBar = view.findViewById(R.id.skb_speed);
+        TextView txtSpeed = view.findViewById(R.id.txt_speed);
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
-        SeekBar seekBar = view.findViewById(R.id.skb_speed);
-        TextView txtSpeed = view.findViewById(R.id.txt_speed);
+
         float currentSpeed = getArguments().getFloat("current_speed");
+        Log.d("BottomSheetFragment", "Current speed: " + currentSpeed);
         int progress = (int) ((currentSpeed - 0.1f) / 1.9f * 100);
         seekBar.setProgress(progress);
-        txtSpeed.setText(String.format("%.1fx", currentSpeed));
+        txtSpeed.setText(String.format("Tốc độ đọc: "+currentSpeed));
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 float speed = 0.1f + (progress / 100.0f) * 1.9f;
-                txtSpeed.setText(String.format("%.1fx", speed));
+                txtSpeed.setText(String.format("Tốc độ đọc: "+ speed));
                 if (speedChangeListener != null) {
                     speedChangeListener.onSpeedChanged(speed);
                 }

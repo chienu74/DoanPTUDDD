@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.NovelChapterActivity">
+    <ProgressBar
+        android:layout_gravity="center"
+        android:id="@+id/progress_bar_novel_chapter"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
 
     <ScrollView
         android:id="@+id/scrollView"
