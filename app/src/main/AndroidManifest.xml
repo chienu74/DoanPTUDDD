@@ -37,14 +37,22 @@
         <activity
             android:name=".activity.NovelDetailActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".activity.ComicActivity"-->
-<!--            android:exported="false" />-->
+        <!--        <activity-->
+        <!--            android:name=".activity.ComicActivity"-->
+        <!--            android:exported="false" />-->
         <activity
             android:name=".activity.ComicDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ChapterReadingActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.ChangePaswordActivity"
             android:exported="false" />
     </application>
 

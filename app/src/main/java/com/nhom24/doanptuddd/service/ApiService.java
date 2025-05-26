@@ -2,6 +2,7 @@ package com.nhom24.doanptuddd.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nhom24.doanptuddd.Request.ChangPassword;
 import com.nhom24.doanptuddd.Request.CommentRequest;
 import com.nhom24.doanptuddd.model.Comment;
 import com.nhom24.doanptuddd.model.User;
@@ -14,6 +15,7 @@ import com.nhom24.doanptuddd.response.NovelListCommentResponse;
 import com.nhom24.doanptuddd.response.NovelListResponse;
 import com.nhom24.doanptuddd.response.NovelResponse;
 import com.nhom24.doanptuddd.response.CommentResponse;
+import com.nhom24.doanptuddd.response.PassWordResponse;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -24,6 +26,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -45,6 +48,11 @@ public interface ApiService {
     @POST("user/login")
     Call<ApiResponse> login(@Body User user);
 
+    @PUT("user/update")
+    Call<ApiResponse> editProfle(@Body User user, @Header("Authorization") String token);
+
+    @PUT("user/update-password")
+    Call<PassWordResponse> changPassword(@Body ChangPassword password, @Header("Authorization") String token);
     //
     @GET("comics")
     Call<ComicResponse> getComic();
@@ -61,7 +69,8 @@ public interface ApiService {
             @Body CommentRequest request,
             @Header("Authorization") String token
     );
-//
+
+    //
     @GET("novels")
     Call<NovelListResponse> getNovels();
 

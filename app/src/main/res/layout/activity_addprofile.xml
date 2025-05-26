@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/white">
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,21 +17,12 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:paddingStart="16dp"
-            android:text="Hoàn tất tài khoản 📋"
+            android:text="Thông tin tài khoản 📋"
             android:textColor="#4796FB"
             android:textFontWeight="700"
             android:textSize="30sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Đừng lo. Chỉ có bạn mới nhìn thấy được dữ liệu cá nhân, không ai có thể thấy được ngoại trừ bạn."
-            android:textSize="16sp"
-            android:textColor="#2E2E2E"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="16dp" />
 
         <!-- Avatar -->
         <androidx.cardview.widget.CardView
@@ -42,6 +33,7 @@
             app:cardElevation="0dp">
 
             <ImageView
+                android:id="@+id/editProfile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -55,7 +47,7 @@
             android:text="Họ và tên"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="@color/primary"
+            android:textColor="#4796FB"
             android:fontFamily="sans-serif-medium"
             android:paddingTop="8dp"/>
 
@@ -66,7 +58,7 @@
             android:text="Nguyễn Văn A"
             android:textSize="20sp"
             android:backgroundTint="#4796FB"
-            android:textColor="@color/primary"
+            android:textColor="#4796FB"
             android:fontFamily="sans-serif-medium"
             android:padding="12dp"/>
 
@@ -78,7 +70,7 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/primary"
+            android:textColor="#4796FB"
             android:paddingTop="8dp"/>
 
         <EditText
@@ -86,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/primary"
+            android:textColor="#4796FB"
             android:textSize="20sp"
             android:backgroundTint="#4796FB"
             android:text="0909 456 789"
@@ -99,7 +91,7 @@
             android:text="Ngày sinh"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/primary"
+            android:textColor="#4796FB"
             android:textSize="18sp"
             android:paddingTop="8dp"/>
 
@@ -108,13 +100,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/primary"
-            android:text="01/01/1990"
-            android:padding="12dp"
+            android:textColor="#4796FB"
             android:textSize="20sp"
             android:backgroundTint="#4796FB"
-            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
-            android:focusable="false"/>
+            android:text="19/03/2003"
+            android:padding="12dp"/>
 
 
         <Button
@@ -124,7 +114,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
-            android:text="Tiếp tục"
+            android:text="Chỉnh sửa"
             android:textColor="@android:color/white" />
 
     </LinearLayout>

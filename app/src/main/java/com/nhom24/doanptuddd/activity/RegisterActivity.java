@@ -83,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setText(""); // Ẩn text trên nút
         registerProgressBar.setVisibility(View.VISIBLE);
         // Gọi API đăng ký
-        User user = new User(accountName, password, gmail);
+        User user = new User(accountName, password, gmail, null, null, null);
         apiService.registerUser(user).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {

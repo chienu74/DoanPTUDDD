@@ -38,6 +38,7 @@ public class ComicDetailActivity extends AppCompatActivity {
     private EditText editTextComment;
     private CommentAdapter commentAdapter; // Store adapter for updating comments
 
+    private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,6 +115,13 @@ public class ComicDetailActivity extends AppCompatActivity {
 
         // Post comment on button click
         buttonComment.setOnClickListener(v -> {
+
+            sessionManager = new SessionManager(ComicDetailActivity.this);
+
+            if (sessionManager.getToken() == null) {
+                Toast.makeText(ComicDetailActivity.this, "Vui lòng đăng nhập để bình luận", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String commentText = editTextComment.getText().toString().trim();
             if (commentText.isEmpty()) {
                 Toast.makeText(ComicDetailActivity.this, "Vui lòng nhập bình luận", Toast.LENGTH_SHORT).show();
