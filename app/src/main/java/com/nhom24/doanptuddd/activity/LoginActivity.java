@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.nhom24.doanptuddd.helper.SessionManager;
 
 import com.nhom24.doanptuddd.R;
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 // Tạo đối tượng User
-                User user = new User(null, password, gmail); // accountName có thể bỏ qua
+                User user = new User(null, password, gmail, null, null, null); // accountName có thể bỏ qua
 
                 // Gọi API đăng nhập
                 Retrofit retrofit = new Retrofit.Builder()
@@ -85,8 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                             if (apiResponse.isSuccess()) {
                                 // Đăng nhập thành công
                                 String token = apiResponse.getToken();
+                                User user = apiResponse.getData();
                                 SessionManager sessionManager = new SessionManager(LoginActivity.this);
                                 sessionManager.saveToken(token);
+                                sessionManager.saveUserInfo(user.getGmail(), user.getAccountName(), user.getBirthday(), user.getPhone(),user.getAvatar());
                                 Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
                                 // Chuyển sang màn hình chính

@@ -12,10 +12,22 @@ public class User {
     @SerializedName("gmail")
     private String gmail;
 
-    public User(String accountName, String password, String gmail) {
+    @SerializedName("birthday")
+    private String birthday;
+
+    @SerializedName("phone")
+    private  String phone;
+
+    @SerializedName("avatar")
+    private String avatar;
+
+    public User(String accountName, String password, String gmail, String birthday, String phone, String avatar) {
         this.accountName = accountName;
         this.password = password;
         this.gmail = gmail;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.avatar = avatar;
     }
 
     // Getter và Setter
@@ -41,5 +53,28 @@ public class User {
 
     public void setGmail(String gmail) {
         this.gmail = gmail;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
