@@ -54,6 +54,14 @@
         <activity
             android:name=".activity.ChangePaswordActivity"
             android:exported="false" />
+
+
+        <activity
+            android:name=".activity.EmailInputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.OtpInputActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

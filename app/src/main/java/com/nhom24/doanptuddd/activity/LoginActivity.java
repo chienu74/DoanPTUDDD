@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailInput, passwordInput;
-    private TextView txtRegister;
+    private TextView txtRegister, textforgotPassword ;
     private Button loginButton;
     private ProgressBar loginProgressBar;
     private static final String BASE_URL = "https://comic.minhquancao0.workers.dev/api/";
@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         loginProgressBar = findViewById(R.id.loginProgressBar);
         txtRegister = findViewById(R.id.txt_register);
+        textforgotPassword = findViewById(R.id.forgot_password);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +127,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        textforgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, EmailInputActivity.class);
                 startActivity(intent);
             }
         });
