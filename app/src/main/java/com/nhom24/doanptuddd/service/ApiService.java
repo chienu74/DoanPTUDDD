@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nhom24.doanptuddd.Request.ChangPassword;
 import com.nhom24.doanptuddd.Request.CommentRequest;
+import com.nhom24.doanptuddd.Request.ForgotEmail;
 import com.nhom24.doanptuddd.model.Comment;
 import com.nhom24.doanptuddd.model.User;
 import com.nhom24.doanptuddd.response.ApiResponse;
@@ -53,7 +54,13 @@ public interface ApiService {
 
     @PUT("user/update-password")
     Call<PassWordResponse> changPassword(@Body ChangPassword password, @Header("Authorization") String token);
-    //
+
+    @POST("forgot-password")
+    Call<PassWordResponse> forgotEmai(@Body ForgotEmail body);
+
+    @POST("change-password")
+    Call<PassWordResponse> passwordChange(@Body ForgotEmail boy);
+
     @GET("comics")
     Call<ComicResponse> getComic();
 

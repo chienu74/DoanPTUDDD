@@ -5,6 +5,8 @@ public class ChangPassword  {
     private String oldPassword;
     private String newPassword;
 
+    private String gmail;
+
     public ChangPassword(String oldPassword, String newPassword) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
