@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.activity.ComicDetailActivity;
 import com.nhom24.doanptuddd.model.Comic;
@@ -40,6 +41,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
         holder.tvTime.setText(comic.getUpdatedAt());
         Glide.with(holder.itemView.getContext())
                 .load(comic.getCoverImage())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imgBook);
 
         holder.tvNewLabel.setVisibility(comic.isNewBoolean() ? View.VISIBLE : View.GONE);

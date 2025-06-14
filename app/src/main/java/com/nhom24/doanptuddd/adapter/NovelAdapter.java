@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.activity.NovelDetailActivity;
 import com.nhom24.doanptuddd.model.Novel;
@@ -42,6 +43,7 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelViewHol
                 .load(book.getCover_image())
                 .placeholder(R.drawable.img_logo)
                 .error(R.drawable.img_logo)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageViewBook);
 
         holder.cardView.setOnClickListener(v -> {

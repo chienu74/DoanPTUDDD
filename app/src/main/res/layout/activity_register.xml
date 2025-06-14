@@ -7,83 +7,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:padding="24dp">
 
         <!-- Tiêu đề -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Đăng ký tài khoản ✨"
             android:textColor="#4796FB"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginTop="16dp" />
+            android:textStyle="bold" />
 
         <!-- Mô tả -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nhập thông tin để tạo tài khoản mới"
-            android:textSize="16sp"
-            android:textColor="#757575"
-            android:fontFamily="sans-serif"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="24dp"
+            android:fontFamily="sans-serif"
+            android:text="Nhập thông tin để tạo tài khoản mới"
+            android:textColor="#757575"
+            android:textSize="16sp" />
 
         <!-- Tên tài khoản -->
-            <EditText
-                android:id="@+id/accountNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Tên tài khoản"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textColorHint="#666666"
-                android:fontFamily="sans-serif-medium"
-                android:padding="12dp" />
+        <EditText
+            android:id="@+id/accountNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Tên tài khoản"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#666666"
+            android:textSize="16sp" />
 
         <!-- Email -->
 
-            <EditText
-                android:id="@+id/gmailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textColorHint="#666666"
-                android:fontFamily="sans-serif-medium"
-                android:padding="12dp" />
+        <EditText
+            android:id="@+id/gmailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#666666"
+            android:textSize="16sp" />
 
         <!-- Mật khẩu -->
-            <EditText
-                android:id="@+id/passwordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Mật khẩu"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textColorHint="#666666"
-                android:fontFamily="sans-serif-medium"
-                android:padding="12dp"
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Mật khẩu"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#666666"
+            android:textSize="16sp" />
 
         <!-- Nhập lại mật khẩu -->
 
-            <EditText
-                android:id="@+id/retypePasswordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nhập lại mật khẩu"
-                android:textSize="16sp"
-                android:textColor="@color/primary"
-                android:textColorHint="#666666"
-                android:fontFamily="sans-serif-medium"
-                android:padding="12dp"
-                android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/retypePasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:hint="Nhập lại mật khẩu"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#666666"
+            android:textSize="16sp" />
 
         <!-- Nút đăng ký với ProgressBar -->
         <FrameLayout
@@ -98,10 +100,10 @@
                 android:layout_height="match_parent"
                 android:backgroundTint="#4796FB"
                 android:elevation="4dp"
+                android:fontFamily="sans-serif-medium"
                 android:text="Đăng ký"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
-                android:fontFamily="sans-serif-medium"
                 app:cornerRadius="8dp" />
 
             <ProgressBar
@@ -109,8 +111,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:visibility="gone"
-                android:indeterminateTint="#FFFFFF" />
+                android:indeterminateTint="#FFFFFF"
+                android:visibility="gone" />
         </FrameLayout>
 
     </LinearLayout>

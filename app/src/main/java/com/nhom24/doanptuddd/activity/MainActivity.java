@@ -5,10 +5,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -27,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    private SearchView searchView;
     private NavController navController;
     private ImageView navheaderimage;
     private TextView nav_header_title, nav_header_subtitle;
-    private  SessionManager sessionManager;
+    private SessionManager sessionManager;
 
 
     @Override
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
+        searchView = findViewById(R.id.search_view);
+        setupSearchView();
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         View headerView = navigationView.getHeaderView(0);
         navheaderimage = headerView.findViewById(R.id.nav_header_image);
@@ -62,15 +68,8 @@ public class MainActivity extends AppCompatActivity {
             navheaderimage.setImageResource(R.drawable.img_avatar);
         }
 
-        nav_header_title.setText(name != null ? name :"User Name");
-        nav_header_subtitle.setText(emai != null ? emai :"user@example.com");
-
-
-
-
-
-
-
+        nav_header_title.setText(name != null ? name : "User Name");
+        nav_header_subtitle.setText(emai != null ? emai : "user@example.com");
 
 
         setSupportActionBar(toolbar);
@@ -117,5 +116,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
+    }
+
+    private void setupSearchView() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Xử lý tìm kiếm khi nhấn Enter
+                performSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Cập nhật tìm kiếm khi nhập liệu
+                return false;
+            }
+        });
+    }
+
+    private void performSearch(String query) {
+        // Thực hiện tìm kiếm với query
+        Toast.makeText(this, "Searching for: " + query, Toast.LENGTH_SHORT).show();
+        // Logic tìm kiếm bạn muốn thực hiện
     }
 }

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nhom24.doanptuddd.R;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class ChapterImageAdapter extends RecyclerView.Adapter<ChapterImageAdapte
                 .load(imageUrl)
                 .placeholder(R.drawable.img_logo)
                 .error(R.drawable.img_background_login)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.imageView);
     }
 

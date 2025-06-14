@@ -21,7 +21,14 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:title="@string/title_home"
-            app:titleTextColor="?attr/colorOnPrimary" />
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false" />
 
         <!-- NavHostFragment để chứa các Fragment -->
         <androidx.fragment.app.FragmentContainerView

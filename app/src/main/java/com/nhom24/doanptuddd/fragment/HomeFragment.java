@@ -60,10 +60,10 @@ public class HomeFragment extends Fragment {
     }
     private void initDataCategory() {
         List<NovelCategory> categoryList = new ArrayList<>();
-        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://i.hinhhinh.com/ebook/190x247/luong-tu-ao-tuong_1747839241.jpg?gt=hdfgdfg&mobile=2"));
-        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://s135.hinhhinh.com//game-thu-tai-xuat-trong-luc-vo-song_1747492361.jpg?gt=hdfgdfg&mobile=2"));
-        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://i.hinhhinh.com/ebook/190x247/luong-tu-ao-tuong_1747839241.jpg?gt=hdfgdfg&mobile=2"));
-        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://s135.hinhhinh.com//game-thu-tai-xuat-trong-luc-vo-song_1747492361.jpg?gt=hdfgdfg&mobile=2"));
+        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://instandeebinhthanh.com/wp-content/uploads/2024/11/hinh-anh-anime-nam-1024x640.jpg"));
+        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://instandeebinhthanh.com/wp-content/uploads/2024/11/hinh-anh-anime-nam-1024x640.jpg"));
+        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://instandeebinhthanh.com/wp-content/uploads/2024/11/hinh-anh-anime-nam-1024x640.jpg"));
+        categoryList.add(new NovelCategory(1, "Hành Động", "Hành Động","https://instandeebinhthanh.com/wp-content/uploads/2024/11/hinh-anh-anime-nam-1024x640.jpg"));
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryList);
         recyclerView2.setAdapter(categoryAdapter);
         recyclerView2.setLayoutManager(new GridLayoutManager(this.getContext(),2));

@@ -2,26 +2,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
-
-
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đổi mật khẩu"
-            android:textStyle="bold"
-            android:textSize="20sp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
-            android:textColor="#000000" />
+            android:text="Đổi mật khẩu"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -36,16 +34,15 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingTop="8dp"
                 android:text="Mật khẩu cũ"
-                android:textColor="#4796FB"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/oldPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4796FB"
                 android:padding="12dp"
-                android:textColor="#4796FB"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="16sp" />
 
             <TextView
@@ -54,16 +51,15 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingTop="8dp"
                 android:text="Mật khẩu mới"
-                android:textColor="#4796FB"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="14sp" />
 
             <EditText
                 android:id="@+id/newPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4796FB"
                 android:padding="12dp"
-                android:textColor="#4796FB"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="16sp" />
 
             <TextView
@@ -72,7 +68,7 @@
                 android:fontFamily="sans-serif-medium"
                 android:paddingTop="8dp"
                 android:text="Điền lại mật khẩu"
-                android:textColor="#4796FB"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="14sp" />
 
 
@@ -80,9 +76,8 @@
                 android:id="@+id/fillPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4796FB"
                 android:padding="12dp"
-                android:textColor="#4796FB"
+                android:textColor="?attr/colorOnSecondary"
                 android:textSize="16sp" />
 
             <Button
@@ -91,11 +86,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="16dp"
-                android:textSize="16sp"
+                android:backgroundTint="?attr/colorPrimary"
                 android:text="Chỉnh sửa"
-                android:textColor="@android:color/white" />
-
-
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
 
         </LinearLayout>
