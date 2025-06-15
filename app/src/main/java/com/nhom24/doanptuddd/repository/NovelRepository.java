@@ -91,4 +91,38 @@ public class NovelRepository {
 
         return data;
     }
+
+    public LiveData<List<Novel>> searchNovels(String query) {
+        MutableLiveData<List<Novel>> data = new MutableLiveData<>();
+        if (service == null) {
+            Log.e("NovelRepository", "ApiService is null, cannot search novels");
+            data.setValue(null);
+            return data;
+        }
+
+        service.searchNovels(query).enqueue(new Callback<NovelListResponse>() {
+            @Override
+            public void onResponse(Call<NovelListResponse> call, Response<NovelListResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    NovelListResponse novelListResponse = response.body();
+                    if (novelListResponse.isSuccess()) {
+                        data.setValue(novelListResponse.getData());
+                    } else {
+                        Log.e("NovelRepository", "Search API returned success=false");
+                        data.setValue(null);
+                    }
+                } else {
+                    Log.e("NovelRepository", "Search error: " + response.code() + " " + response.message());
+                    data.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NovelListResponse> call, Throwable t) {
+                Log.e("NovelRepository", "Search failure: " + t.getMessage());
+                data.setValue(null);
+            }
+        });
+        return data;
+    }
 }

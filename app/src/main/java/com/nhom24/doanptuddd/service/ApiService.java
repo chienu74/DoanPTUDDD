@@ -29,6 +29,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     String URL = "https://comic.minhquancao0.workers.dev/api/";
@@ -96,6 +97,11 @@ public interface ApiService {
 
     @GET("novels/{novelId}/comments")
     Call<NovelListCommentResponse> getNovelComment(@Path("novelId") int novelId);
-
     //
+
+    @GET("novels/search")
+    Call<NovelListResponse> searchNovels(@Query("query") String query);
+
+    @GET("comic/search")
+    Call<ComicResponse> searchComics(@Query("query") String query);
 }

@@ -17,13 +17,21 @@ import com.nhom24.doanptuddd.R;
 import com.nhom24.doanptuddd.activity.NovelDetailActivity;
 import com.nhom24.doanptuddd.model.Novel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelViewHolder> {
-    private final List<Novel> bookList;
+    private List<Novel> bookList;
 
     public NovelAdapter(List<Novel> bookList) {
-        this.bookList = bookList;
+        this.bookList = bookList != null ? bookList : new ArrayList<>();
+    }
+
+    // Phương thức cập nhật dữ liệu
+    public void updateData(List<Novel> newBookList) {
+        this.bookList.clear();
+        this.bookList.addAll(newBookList != null ? newBookList : new ArrayList<>());
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -37,7 +45,7 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelViewHol
     @Override
     public void onBindViewHolder(@NonNull NovelViewHolder holder, int position) {
         Novel book = bookList.get(position);
-        holder.textViewBookName.setText(book.getTitle());
+        holder.textViewBookName.setText(book.getTitle() != null ? book.getTitle() : "Không có tiêu đề");
 
         Glide.with(holder.imageViewBook.getContext())
                 .load(book.getCover_image())
@@ -55,7 +63,7 @@ public class NovelAdapter extends RecyclerView.Adapter<NovelAdapter.NovelViewHol
 
     @Override
     public int getItemCount() {
-        return bookList != null ? bookList.size() : 0;
+        return bookList.size();
     }
 
     public static class NovelViewHolder extends RecyclerView.ViewHolder {

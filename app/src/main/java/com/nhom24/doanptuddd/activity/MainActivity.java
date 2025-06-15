@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,6 +13,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.nhom24.doanptuddd.R;
+import com.nhom24.doanptuddd.fragment.ComicFragment;
+import com.nhom24.doanptuddd.fragment.NovelFragment;
 import com.nhom24.doanptuddd.helper.SessionManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView nav_header_title, nav_header_subtitle;
     private SessionManager sessionManager;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
         searchView = findViewById(R.id.search_view);
-        setupSearchView();
+
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         View headerView = navigationView.getHeaderView(0);
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         navigationView.bringToFront();
+        setupSearchView();
     }
 
     @Override
@@ -136,8 +138,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performSearch(String query) {
-        // Thực hiện tìm kiếm với query
-        Toast.makeText(this, "Searching for: " + query, Toast.LENGTH_SHORT).show();
-        // Logic tìm kiếm bạn muốn thực hiện
+        // Lấy đích hiện tại từ NavController
+        int currentDestinationId = navController.getCurrentDestination().getId();
+
+        // Tạo Bundle chứa search_query
+        Bundle bundle = new Bundle();
+        bundle.putString("search_query", query);
+
+        // Điều hướng hoặc gửi query đến fragment hiện tại
+        if (currentDestinationId == R.id.navigation_novel) {
+            // Đã ở NovelFragment, gửi query qua setArguments
+            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.nav_host_fragment);
+            if (navHostFragment != null) {
+                Fragment currentFragment = navHostFragment.getChildFragmentManager().getPrimaryNavigationFragment();
+                if (currentFragment instanceof NovelFragment) {
+                    currentFragment.setArguments(bundle);
+                    ((NovelFragment) currentFragment).performSearch(query);
+                }
+            }
+        } else if (currentDestinationId == R.id.navigation_comic) {
+            // Tương tự cho ComicFragment (nếu có)
+            NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.nav_host_fragment);
+//            if (navHostFragment != null) {
+//                Fragment currentFragment = navHostFragment.getChildFragmentManager().getPrimaryNavigationFragment();
+//                if (currentFragment instanceof ComicFragment) {
+//                    currentFragment.setArguments(bundle);
+//                    ((ComicFragment) currentFragment).performSearch(query);
+//                }
+//            }
+        } else {
+            // Nếu không phải NovelFragment hoặc ComicFragment, điều hướng đến NovelFragment
+            navController.navigate(R.id.navigation_novel, bundle);
+        }
     }
 }

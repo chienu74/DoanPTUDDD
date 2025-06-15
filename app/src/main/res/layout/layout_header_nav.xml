@@ -8,23 +8,17 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <androidx.cardview.widget.CardView
+
+    <ImageView
+        android:id="@+id/nav_header_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="14dp"
-        android:layout_marginBottom="10dp"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="0dp">
-
-        <ImageView
-            android:id="@+id/nav_header_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_account_circle"
-            tools:ignore="UseAppTint" />
-    </androidx.cardview.widget.CardView>
-
+        android:layout_gravity="center"
+        android:background="@drawable/avatar_border"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_account_circle"
+        android:clipToOutline="true"/>
     <TextView
         android:id="@+id/nav_header_title"
         android:layout_width="wrap_content"
